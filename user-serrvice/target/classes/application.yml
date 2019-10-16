@@ -1,0 +1,9 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/yun6
+    username: root
+    password: root
+mybatis:
+  type-aliases-package: cn.itcast.user.pojo

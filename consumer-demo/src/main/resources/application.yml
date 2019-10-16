@@ -1,0 +1,10 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: consumer-service
+eureka:
+  client:
+    service-url:
+      # 默认注册到这个地址上
+      defaultZone: http://127.0.0.1:10086/eureka
