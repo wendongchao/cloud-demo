@@ -56,6 +56,7 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!--父工程添加lombok子工程就不用添加了-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

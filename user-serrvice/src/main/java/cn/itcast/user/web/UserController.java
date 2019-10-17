@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * RestController:包含ResponseBody与requestMapping相对应，返回与接收
+ */
 @RestController
 @RequestMapping("user")
 public class UserController {

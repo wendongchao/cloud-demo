@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * 只是调用者没必要连接数据库
+ * 实体类
  */
 
 @Data

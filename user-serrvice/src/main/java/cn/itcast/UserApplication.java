@@ -7,6 +7,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * 服务提供者，提供服务给调用者
+ * eureka客户端，mapper通用组件根据包路径扫描mapper文件
  */
 @EnableEurekaClient
 @SpringBootApplication

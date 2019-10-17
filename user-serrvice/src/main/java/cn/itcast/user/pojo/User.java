@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
+/**
+ * table可以映射数据库中的表，
+ */
 @Table(name="tb_user")
 @Data
 public class User {
