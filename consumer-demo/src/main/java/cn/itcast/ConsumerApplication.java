@@ -2,6 +2,9 @@ package cn.itcast;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -11,10 +14,18 @@ import org.springframework.web.client.RestTemplate;
  * 调用者                      提供者
  * ConsumerApplication -----> UserApplication
  */
+/*@EnableCircuitBreaker
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication*/
+
+@SpringCloudApplication
 public class ConsumerApplication {
+    /**
+     * LoadBalanced作用：ribbon的负载均衡拦截，会拦截restTemplate请求，之后进行负载均衡
+     * @return
+     */
     @Bean
+    @LoadBalanced
     public RestTemplate restTemplate() {
         // 这次我们使用了OkHttp客户端,只需要注入工厂即可
         return new RestTemplate();

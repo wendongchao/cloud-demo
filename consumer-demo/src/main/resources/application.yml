@@ -14,3 +14,14 @@ eureka:
       # 使用IP地址
       prefer-ip-address: true
       ip-address: 127.0.0.1
+user-service:
+  ribbon:
+    # 设置ribbon的默认轮询规则,随机
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000 # 设置hystrix的超时时间为6000ms
