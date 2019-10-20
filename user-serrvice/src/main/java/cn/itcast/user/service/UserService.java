@@ -12,8 +12,9 @@ public class UserService {
     private UserMapper userMapper;
 
     public User queryById(Long id){
+        //设置延长时间模拟真实场景，验证负载均衡
         try {
-            Thread.sleep(3000);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

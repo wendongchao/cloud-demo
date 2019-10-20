@@ -12,6 +12,7 @@ eureka:
   server:
     enable-self-preservation: false # 关闭自我保护模式（默认为打开）
     eviction-interval-timer-in-ms: 1000 # 扫描失效服务的间隔时间（默认为60*1000ms）
+    # 实例的地址
     instance:
       # 使用IP地址
       prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称

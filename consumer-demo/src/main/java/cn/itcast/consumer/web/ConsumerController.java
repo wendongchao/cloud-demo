@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 /**
- * DefaultProperties:hystrix类全局配置，适用这个类
+ * DefaultProperties:hystrix类全局配置，适用类，熔断器与负载均衡
  */
 @RestController
 @RequestMapping("consumer")
@@ -66,16 +66,38 @@ public class ConsumerController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+/*    @GetMapping("/{id}")
     //@HystrixCommand(fallbackMethod = "queryByIdFallBack")
-    //@HystrixCommand(commandProperties = {
-          //  @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "4000")
-    //})
+   // @HystrixCommand(commandProperties = {
+       //     @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "3000")
+   // })
+    @HystrixCommand(
+            commandProperties = {
+                    // 熔断触发的次数：10次一组，计算一组中有多少次失败，closed-->open过程
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+                    // 休眠时间窗：熔断器进入休眠的时间10秒，休眠时间过后熔断器进入半开的状态，open-->half open过程
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+                    // 熔断器触发的百分比：当失败的比例达到60%这个百分比时，熔断器打开，closed-->open
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")
+            }
+    )
+    public String queryById(@PathVariable("id") Long id){
+        if(id % 2 == 0){
+            throw new RuntimeException("");
+        }
+        String url = "http://user-service/user/"+id;
+        String user = restTemplate.getForObject(url,String.class);
+        return user;
+    }*/
+
+
+    @GetMapping("/{id}")
     public String queryById(@PathVariable("id") Long id){
         String url = "http://user-service/user/"+id;
         String user = restTemplate.getForObject(url,String.class);
         return user;
     }
+
     public String defaultFallback(){
         return "服务太拥挤了";
     }
