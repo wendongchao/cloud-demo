@@ -18,6 +18,16 @@ user-service:
   ribbon:
     # 设置ribbon的默认轮询规则,随机
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+# 开启feign的hystrix的熔断
+feign:
+  hystrix:
+    enabled: true
+# 负载均衡
+ribbon:
+  # 连接超时时长
+  ConnectionTimeOut: 500
+  # 读取时长
+  ReadTimeOut: 2000
 hystrix:
   command:
     default:

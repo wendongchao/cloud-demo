@@ -13,11 +13,11 @@ public class UserService {
 
     public User queryById(Long id){
         //设置延长时间模拟真实场景，验证负载均衡
-        try {
+/*        try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         return userMapper.selectByPrimaryKey(id);
     }
 }

@@ -1,5 +1,6 @@
 package cn.itcast.consumer.web;
 
+import cn.itcast.consumer.client.UserClient;
 import cn.itcast.consumer.pojo.User;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -21,10 +22,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("consumer")
-@DefaultProperties(defaultFallback = "defaultFallback")
+//@DefaultProperties(defaultFallback = "defaultFallback")
 public class ConsumerController {
-    @Autowired
-    private RestTemplate restTemplate;
+  /*  @Autowired
+    private RestTemplate restTemplate;*/
 
     //引入ribbon用于负载均衡，使消费者可以访问多个服务提供者
  //   @Autowired
@@ -91,11 +92,17 @@ public class ConsumerController {
     }*/
 
 
+    @Autowired
+    private UserClient userClient;
+
+    /**
+     * 使用feign进行请求参数的调用
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
-    public String queryById(@PathVariable("id") Long id){
-        String url = "http://user-service/user/"+id;
-        String user = restTemplate.getForObject(url,String.class);
-        return user;
+    public User queryById(@PathVariable("id") Long id){
+        return userClient.queryUserById(id);
     }
 
     public String defaultFallback(){

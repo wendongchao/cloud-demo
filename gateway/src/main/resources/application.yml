@@ -1,0 +1,29 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: api-gateway
+# 配置zuul映射规则
+# zuul:
+  # routes:
+    # user-service: # 这里是路由id，随意写
+      # path: /user-service/** # 这里是映射路径,访问路径
+      # url: http://127.0.0.1:8081 # 映射路径对应的实际url地址
+      # 从Eureka获取服务的地址信息，映射时无需指定IP地址，通过服务名称来访问，而且Zuul已经集成了Ribbon的负载均衡功能。
+      # serviceId: user-service # 指定服务名称
+eureka:
+  client:
+    # 客户端获取服务列表的周期：5秒
+    registry-fetch-interval-seconds: 5
+    # 服务列表
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  # 开启实例的前缀IP地址，指定IP地址
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+zuul:
+  prefix: /api # 路由前缀：http://localhost:10010/api/user-service/user/7
+  routes:
+    # 简化路由配置：zuul.routes.<serviceId>=<path>
+    user-service: /user-service/** #映射路径
